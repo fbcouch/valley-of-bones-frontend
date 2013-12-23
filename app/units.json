@@ -1,0 +1,226 @@
+{
+    "entities": [
+        {
+            "id": "castle-base",
+            "type": "building",
+            "image": "castle",
+            "title": "Castle",
+            "desc": "This is your home base.",
+            "properties": {
+                "curhp": 100,
+                "maxhp": 100,
+                "armor": 1,
+                "food": -15,
+                "requires": [],
+                "attackdamage": 10,
+                "attackspeed": 1,
+                "attackrange": 3,
+                "movespeed": 0,
+                "cost": -1,
+                "upkeep": -75,
+                "subtype": "building"
+            }
+        },
+        {
+            "id": "tower-base",
+            "type": "building",
+            "image": "tower",
+            "title": "Tower",
+            "desc": "Capture these to gain extra income and supply",
+            "properties": {
+                "curhp": 0,
+                "maxhp": 30,
+                "armor": 1,
+                "food": -2,
+                "requires": [],
+                "attackdamage": 5,
+                "attackspeed": 1,
+                "attackrange": 3,
+                "movespeed": 0,
+                "cost": -1,
+                "upkeep": -15,
+                "subtype": "building",
+                "capturable": true
+            }
+        },
+        {
+            "id": "marine-base",
+            "type": "unit",
+            "image": "marine",
+            "title": "Space Marine",
+            "desc": "Basic attacking unit",
+            "properties": {
+                "curhp": 15,
+                "maxhp": 15,
+                "armor": 0,
+                "food": 1,
+                "requires": [ "castle-base" ],
+                "attackdamage": 5,
+                "attackspeed": 2,
+                "attackrange": 3,
+                "movespeed": 3,
+                "cost": 45,
+                "subtype": "light",
+                "ability": "detect",
+                "buildtime": 1
+            }
+        },
+
+        {
+            "id": "sniper-base",
+            "type": "unit",
+            "image": "sniper",
+            "title": "Sniper",
+            "desc": "Light unit with long range",
+            "properties": {
+                "curhp": 15,
+                "maxhp": 15,
+                "armor": 0,
+                "food": 2,
+                "requires": [ "castle-base" ],
+                "attackdamage": 5,
+                "attackspeed": 1,
+                "attackrange": 5,
+                "movespeed": 2,
+                "cost": 100,
+                "subtype": "light",
+                "bonus": {
+                    "light": 4
+                },
+                "ability": "stealth",
+                "buildtime": 1
+            }
+        },
+
+        {
+            "id": "bazooka",
+            "type": "unit",
+            "image": "bazooka",
+            "title": "Bazooka Guy",
+            "desc": "Uses high explosives",
+            "properties": {
+                "curhp": 25,
+                "maxhp": 25,
+                "armor": 0,
+                "food": 2,
+                "requires": [ "castle-base" ],
+                "attackdamage": 10,
+                "attackspeed": 1,
+                "attackrange": 3,
+                "movespeed": 2,
+                "cost": 75,
+                "subtype": "light",
+                "bonus": {
+                    "armored": 2,
+                    "building": 2
+                },
+                "buildtime": 1
+            }
+        },
+
+        {
+            "id": "saboteur",
+            "type": "unit",
+            "image": "saboteur",
+            "title": "Saboteur",
+            "desc": "Uses high explosives",
+            "properties": {
+                "curhp": 5,
+                "maxhp": 5,
+                "armor": 0,
+                "food": 2,
+                "requires": [ "castle-base" ],
+                "attackdamage": 0,
+                "attackspeed": 1,
+                "attackrange": 1,
+                "movespeed": 4,
+                "cost": 90,
+                "subtype": "light",
+                "buildtime": 1,
+                "ability": "sabotage"
+            }
+        },
+
+        {
+            "id": "tank-base",
+            "type": "unit",
+            "image": "tank",
+            "title": "Light Tank",
+            "desc": "Tank with light armor",
+            "properties": {
+                "curhp": 45,
+                "maxhp": 45,
+                "armor": 2,
+                "food": 5,
+                "requires": [ "castle-base" ],
+                "attackdamage": 15,
+                "attackspeed": 1,
+                "attackrange": 3,
+                "movespeed": 1,
+                "cost": 150,
+                "subtype": "armored",
+                "buildtime": 1
+            }
+        },
+
+        {
+            "id": "light-mech",
+            "type": "unit",
+            "image": "light-mech",
+            "title": "Light Mech",
+            "desc": "Mech walker",
+            "properties": {
+                "curhp": 30,
+                "maxhp": 30,
+                "armor": 1,
+                "food": 3,
+                "requires": [ "castle-base" ],
+                "attackdamage": 5,
+                "attackspeed": 3,
+                "attackrange": 3,
+                "movespeed": 2,
+                "cost": 125,
+                "subtype": "armored",
+                "buildtime": 1
+            }
+        },
+
+        {
+            "id": "artillery",
+            "type": "unit",
+            "image": "artillery",
+            "title": "Artillery",
+            "desc": "Artillery",
+            "properties": {
+                "curhp": 15,
+                "maxhp": 15,
+                "armor": 1,
+                "food": 5,
+                "requires": [ "castle-base" ],
+                "attackdamage": 25,
+                "attackspeed": 1,
+                "attackrange": 5,
+                "sightrange": 2,
+                "movespeed": 1,
+                "cost": 175,
+                "subtype": "armored",
+                "buildtime": 1,
+                "splashdistance": 1,
+                "splashdamage": 0.3
+            }
+        },
+
+        {
+            "id": "attack-upgrade-1",
+            "type": "upgrade",
+            "image": "marine",
+            "title": "Attack Upgrade 1",
+            "desc": "Adds +1 attack",
+            "properties": {
+                "requires": [ "castle-base" ],
+                "applies-to": [ "space-marine" ],
+                "attackdamage": 1
+            }
+        }
+    ]
+}
