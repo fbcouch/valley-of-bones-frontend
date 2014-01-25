@@ -3,7 +3,7 @@
   var createChart;
 
   $.ajax("http://secure-caverns-9874.herokuapp.com/game").done(function(data) {
-    var cmd, game, games_per_version, i, key, marines_per_version, win_pct_first_player, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _name, _name1, _name2, _ref;
+    var cmd, game, games, games_per_version, i, key, marines_per_version, udata, unit, unit_data, unit_data_per_game, units_per_game, win_pct_first_player, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _len6, _len7, _m, _n, _name, _name1, _name2, _name3, _o, _p, _ref, _ref1;
     for (_i = 0, _len = data.length; _i < _len; _i++) {
       game = data[_i];
       if (!isNaN(parseFloat(game.version)) && isFinite(game.version)) {
@@ -12,7 +12,7 @@
       game.game = JSON.parse(game.game.replace(',]', ']'));
     }
     data = data.map(function(game) {
-      if (game.game.history.length > 5) {
+      if (game.game.history.length >= 10) {
         return game;
       } else {
         return null;
@@ -60,10 +60,6 @@
       while (game.game.history[i].owner === -1 && i < game.game.history.length) {
         i++;
       }
-      console.log('-----');
-      console.log(game.version);
-      console.log(game.game.history[i].owner);
-      console.log(game.game.result);
       if (game.game.history[i].owner === game.game.result) {
         win_pct_first_player[game.version]++;
       }
@@ -71,7 +67,77 @@
     for (key in games_per_version) {
       win_pct_first_player[key] = win_pct_first_player[key] / games_per_version[key] * 100;
     }
-    return createChart(win_pct_first_player, '#winPctFirstPerVersion', 1);
+    createChart(win_pct_first_player, '#winPctFirstPerVersion', 1);
+    unit_data = {};
+    for (_n = 0, _len5 = data.length; _n < _len5; _n++) {
+      game = data[_n];
+      _ref1 = game.game.history;
+      for (_o = 0, _len6 = _ref1.length; _o < _len6; _o++) {
+        cmd = _ref1[_o];
+        if (!(cmd.type === "Build" && game.version === "0.0.17")) {
+          continue;
+        }
+        unit_data[_name3 = cmd.building] || (unit_data[_name3] = {
+          count: 0,
+          p1_count: 0,
+          p2_count: 0,
+          w_count: 0,
+          l_count: 0
+        });
+        unit_data[cmd.building].count++;
+        if (cmd.owner === game.game.history[1].owner) {
+          unit_data[cmd.building].p1_count++;
+        } else {
+          unit_data[cmd.building].p2_count++;
+        }
+        if (cmd.owner === game.game.result) {
+          unit_data[cmd.building].w_count++;
+        } else {
+          unit_data[cmd.building].l_count++;
+        }
+      }
+    }
+    unit_data_per_game = JSON.parse(JSON.stringify(unit_data));
+    games = 0;
+    for (_p = 0, _len7 = data.length; _p < _len7; _p++) {
+      game = data[_p];
+      if (game.version === "0.0.17") {
+        games++;
+      }
+    }
+    for (unit in unit_data_per_game) {
+      unit_data_per_game[unit].count /= games;
+      unit_data_per_game[unit].p1_count /= games;
+      unit_data_per_game[unit].p2_count /= games;
+      unit_data_per_game[unit].w_count /= games;
+      unit_data_per_game[unit].l_count /= games;
+    }
+    units_per_game = {};
+    for (unit in unit_data_per_game) {
+      udata = unit_data_per_game[unit];
+      units_per_game[unit] = udata.count;
+    }
+    createChart(units_per_game, '#unitsBuiltPerGame', 1);
+    for (unit in unit_data_per_game) {
+      udata = unit_data_per_game[unit];
+      units_per_game[unit] = udata.p1_count;
+    }
+    createChart(units_per_game, '#unitsP1BuiltPerGame', 1);
+    for (unit in unit_data_per_game) {
+      udata = unit_data_per_game[unit];
+      units_per_game[unit] = udata.p2_count;
+    }
+    createChart(units_per_game, '#unitsP2BuiltPerGame', 1);
+    for (unit in unit_data_per_game) {
+      udata = unit_data_per_game[unit];
+      units_per_game[unit] = udata.w_count;
+    }
+    createChart(units_per_game, '#unitsWBuiltPerGame', 1);
+    for (unit in unit_data_per_game) {
+      udata = unit_data_per_game[unit];
+      units_per_game[unit] = udata.l_count;
+    }
+    return createChart(units_per_game, '#unitsLBuiltPerGame', 1);
   }).fail(function(xhr, textStatus, err) {
     return console.log(err);
   });
