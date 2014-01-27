@@ -5,18 +5,17 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/main.scss" afterPath="$PROJECT_DIR$/app/styles/main.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/stats.coffee" afterPath="$PROJECT_DIR$/app/scripts/controllers/stats.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/stats.html" afterPath="$PROJECT_DIR$/app/views/stats.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="valley-of-bones-frontend.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390743384952" ignored="false" />
     <file path="/app.coffee" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390444873544" ignored="false" />
     <file path="/index.html" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390662148155" ignored="false" />
-    <file path="/main.scss" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390777101230" ignored="false" />
+    <file path="/main.scss" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390785569175" ignored="false" />
     <file path="/main.html" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390662103209" ignored="false" />
     <file path="/download.html" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390662351666" ignored="false" />
-    <file path="/stats.coffee" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390782054243" ignored="false" />
-    <file path="/stats.html" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390744452524" ignored="false" />
+    <file path="/stats.coffee" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390794573671" ignored="false" />
+    <file path="/stats.html" changelist="884101d4-7bf0-4b4a-9c1d-61d19077cbfc" time="1390794313699" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,19 +76,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="stats.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="stats.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/stats.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="15" selection-start="123" selection-end="123" vertical-scroll-proportion="-2.6153846">
+            <state line="24" column="62" selection-start="887" selection-end="887" vertical-scroll-proportion="0.4811321">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stats.coffee" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="stats.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/controllers/stats.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="250" column="0" selection-start="8642" selection-end="8642" vertical-scroll-proportion="0.70095694">
+            <state line="207" column="141" selection-start="7262" selection-end="7262" vertical-scroll-proportion="-22.25926">
               <folding />
             </state>
           </provider>
@@ -98,7 +97,7 @@
       <file leaf-file-name="main.scss" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/styles/main.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="13" selection-start="919" selection-end="919" vertical-scroll-proportion="-25.16">
+            <state line="72" column="24" selection-start="973" selection-end="973" vertical-scroll-proportion="-25.84">
               <folding />
             </state>
           </provider>
@@ -128,8 +127,8 @@
         <option value="$PROJECT_DIR$/graph-test/css/vob.css" />
         <option value="$PROJECT_DIR$/graph-test/src/app.coffee" />
         <option value="$PROJECT_DIR$/app/index.html" />
-        <option value="$PROJECT_DIR$/app/views/stats.html" />
         <option value="$PROJECT_DIR$/app/styles/main.scss" />
+        <option value="$PROJECT_DIR$/app/views/stats.html" />
         <option value="$PROJECT_DIR$/app/scripts/controllers/stats.coffee" />
       </list>
     </option>
@@ -707,23 +706,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/stats.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="15" selection-start="123" selection-end="123" vertical-scroll-proportion="-2.6153846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/main.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="13" selection-start="919" selection-end="919" vertical-scroll-proportion="-25.16">
+        <state line="72" column="24" selection-start="973" selection-end="973" vertical-scroll-proportion="-25.84">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/controllers/stats.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="250" column="0" selection-start="8642" selection-end="8642" vertical-scroll-proportion="0.70095694">
+        <state line="207" column="141" selection-start="7262" selection-end="7262" vertical-scroll-proportion="-22.25926">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/stats.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="62" selection-start="887" selection-end="887" vertical-scroll-proportion="0.4811321">
           <folding />
         </state>
       </provider>

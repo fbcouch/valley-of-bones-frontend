@@ -65,6 +65,12 @@ svg.pie text {
 
 svg.pie text.label {
   fill: #999;
+  font: 14px sans-serif;
+}
+
+svg.pie text.small-label {
+  fill: #999;
+  font: 10px sans-serif;
 }
 
 svg.pie text.value {

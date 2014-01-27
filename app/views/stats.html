@@ -1,24 +1,47 @@
 
 <h2>Games Played Per Version</h2>
-<svg class="chart" id="gamesPerVersion" width="420" height="120"></svg>
 
-<svg class="pie" id="versionPieChart" width="400" height="400"></svg>
+<svg class="pie" id="versionPieChart" width="400" height="300"></svg>
+<svg class="pie" id="winPctPieChart" width="400" height="300"></svg>
+<svg class="pie" id="mapPieChart" width="400" height="300"></svg>
 
-<h2>First Player Win % By Version</h2>
-<svg class="chart" id="winPctFirstPerVersion" width="420" height="120"></svg>
+<p>
+    <b>Version: </b>
+    <span ng-repeat="version in versions">
+        <a ng-hide="version == filterVersion" ng-click="setVersionFilter(version)">{{ version }}</a>
+        <span ng-show="version == filterVersion">{{ version }}</span>
+        <span>|</span>
+    </span>
+    <a ng-hide="filterVersion == null" ng-click="setVersionFilter(null)">None</a>
+    <span ng-show="filterVersion == null">None</span>
+</p>
 
-<h2>Units Built Per Game (v0.0.17)</h2>
-<svg class="chart" id="unitsBuiltPerGame" width="420" height="120"></svg>
+<p>
+    <b>Map: </b>
+    <span ng-repeat="map in maps">
+        <a ng-hide="filterMap == map" ng-click="setMapFilter(map)">{{ map }}</a>
+        <span ng-show="filterMap == map">{{ map }}</span>
+        <span>|</span>
+    </span>
+    <a ng-hide="filterMap == null" ng-click="setMapFilter(null)">None</a>
+    <span ng-show="filterMap == null">None</span>
+</p>
 
-<h2>Units Built Per Game For P1 (v0.0.17)</h2>
-<svg class="chart" id="unitsP1BuiltPerGame" width="420" height="120"></svg>
+<!--<h2>First Player Win % By Version</h2>-->
+<!--<svg class="chart" id="winPctFirstPerVersion" width="420" height="120"></svg>-->
 
-<h2>Units Built Per Game For P2 (v0.0.17)</h2>
-<svg class="chart" id="unitsP2BuiltPerGame" width="420" height="120"></svg>
+<!--<h2>Units Built Per Game (v0.0.17)</h2>-->
+<!--<svg class="chart" id="unitsBuiltPerGame" width="420" height="120"></svg>-->
 
-<h2>Units Built Per Game By Winner (v0.0.17)</h2>
-<svg class="chart" id="unitsWBuiltPerGame" width="420" height="120"></svg>
+<!--<h2>Units Built Per Game For P1 (v0.0.17)</h2>-->
+<!--<svg class="chart" id="unitsP1BuiltPerGame" width="420" height="120"></svg>-->
 
-<h2>Units Built Per Game By Loser (v0.0.17)</h2>
-<svg class="chart" id="unitsLBuiltPerGame" width="420" height="120"></svg>
+<!--<h2>Units Built Per Game For P2 (v0.0.17)</h2>-->
+<!--<svg class="chart" id="unitsP2BuiltPerGame" width="420" height="120"></svg>-->
+
+<!--<h2>Units Built Per Game By Winner (v0.0.17)</h2>-->
+<!--<svg class="chart" id="unitsWBuiltPerGame" width="420" height="120"></svg>-->
+
+<!--<h2>Units Built Per Game By Loser (v0.0.17)</h2>-->
+<!--<svg class="chart" id="unitsLBuiltPerGame" width="420" height="120"></svg>-->
 
