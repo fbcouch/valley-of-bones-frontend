@@ -57,3 +57,16 @@ svg.chart text {
   font: 10px sans-serif;
   text-anchor: end;
 }
+
+svg.pie text {
+  fill: #333;
+  font: 14px sans-serif;
+}
+
+svg.pie text.label {
+  fill: #999;
+}
+
+svg.pie text.value {
+  fill: #000;
+}
