@@ -1,5 +1,5 @@
 
-<h2>Games Played Per Version</h2>
+<h2>Statistics: Games Played</h2>
 
 <svg class="pie" id="versionPieChart" width="400" height="300"></svg>
 <svg class="pie" id="winPctPieChart" width="400" height="300"></svg>
@@ -10,7 +10,7 @@
     <span ng-repeat="version in versions">
         <a ng-hide="version == filterVersion" ng-click="setVersionFilter(version)">{{ version }}</a>
         <span ng-show="version == filterVersion">{{ version }}</span>
-        <span>|</span>
+        <span> | </span>
     </span>
     <a ng-hide="filterVersion == null" ng-click="setVersionFilter(null)">None</a>
     <span ng-show="filterVersion == null">None</span>
@@ -21,7 +21,37 @@
     <span ng-repeat="map in maps">
         <a ng-hide="filterMap == map" ng-click="setMapFilter(map)">{{ map }}</a>
         <span ng-show="filterMap == map">{{ map }}</span>
-        <span>|</span>
+        <span> | </span>
+    </span>
+    <a ng-hide="filterMap == null" ng-click="setMapFilter(null)">None</a>
+    <span ng-show="filterMap == null">None</span>
+</p>
+
+<h2>Statistics: Units Built</h2>
+
+<svg class="pie" id="totalUnitsPieChart"></svg>
+<svg class="pie" id="unitsP1PieChart"></svg>
+<svg class="pie" id="unitsP2PieChart"></svg>
+<svg class="pie" id="unitsWinnerPieChart"></svg>
+<svg class="pie" id="unitsLoserPieChart"></svg>
+
+<p>
+    <b>Version: </b>
+    <span ng-repeat="version in versions">
+        <a ng-hide="version == filterVersion" ng-click="setVersionFilter(version)">{{ version }}</a>
+        <span ng-show="version == filterVersion">{{ version }}</span>
+        <span> | </span>
+    </span>
+    <a ng-hide="filterVersion == null" ng-click="setVersionFilter(null)">None</a>
+    <span ng-show="filterVersion == null">None</span>
+</p>
+
+<p>
+    <b>Map: </b>
+    <span ng-repeat="map in maps">
+        <a ng-hide="filterMap == map" ng-click="setMapFilter(map)">{{ map }}</a>
+        <span ng-show="filterMap == map">{{ map }}</span>
+        <span> | </span>
     </span>
     <a ng-hide="filterMap == null" ng-click="setMapFilter(null)">None</a>
     <span ng-show="filterMap == null">None</span>

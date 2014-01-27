@@ -7,6 +7,12 @@ angular.module('valleyOfBonesFrontendApp')
     mapPieChart = new PieChart('#mapPieChart', 'PER MAP')
     winPctPieChart = new PieChart('#winPctPieChart', 'WINNER')
 
+    totalUnitsPieChart = new PieChart('#totalUnitsPieChart', 'TOTAL', 'units built')
+    unitsP1PieChart = new PieChart('#unitsP1PieChart', 'P1', 'units built')
+    unitsP2PieChart = new PieChart('#unitsP2PieChart', 'P2', 'units built')
+    unitsWinnerPieChart = new PieChart('#unitsWinnerPieChart', 'WINNER', 'units built')
+    unitsLoserPieChart = new PieChart('#unitsLoserPieChart', 'LOSER', 'units built')
+
     data = $resource('http://secure-caverns-9874.herokuapp.com/game').query () ->
       for game in data
         if !isNaN(parseFloat(game.version)) and isFinite(game.version)
@@ -81,43 +87,27 @@ angular.module('valleyOfBonesFrontendApp')
 
       mapPieChart.update(mapData)
 
-#      win_pct_first_player = {}
-#
-#      for game in data
-#        win_pct_first_player[game.version] or= 0
-#
-#        i = 0
-#        while game.game.history[i].owner is -1 and i < game.game.history.length
-#          i++
-#
-#        win_pct_first_player[game.version]++ if game.game.history[i].owner is game.game.result
-#
-#      for key of games_per_version
-#        win_pct_first_player[key] = win_pct_first_player[key] / games_per_version[key] * 100
-#
-#      $scope.createChart(win_pct_first_player, '#winPctFirstPerVersion', 1)
-#
-#      unit_data = {}
-#
-#      for game in data
-#        for cmd in game.game.history when cmd.type is "Build" and game.version is "0.0.17"
-#          unit_data[cmd.building] or=
-#            count: 0
-#            p1_count: 0
-#            p2_count: 0
-#            w_count: 0
-#            l_count: 0
-#          unit_data[cmd.building].count++
-#          if cmd.owner is game.game.history[1].owner
-#            unit_data[cmd.building].p1_count++
-#          else
-#            unit_data[cmd.building].p2_count++
-#          if cmd.owner is game.game.result
-#            unit_data[cmd.building].w_count++
-#          else
-#            unit_data[cmd.building].l_count++
-#
-#
+      unit_data = {}
+
+      for game in filteredData
+        for cmd in game.game.history when cmd.type is "Build"
+          unit_data[cmd.building] or=
+            count: 0
+            p1_count: 0
+            p2_count: 0
+            w_count: 0
+            l_count: 0
+          unit_data[cmd.building].count++
+          if cmd.owner is game.game.history[1].owner
+            unit_data[cmd.building].p1_count++
+          else
+            unit_data[cmd.building].p2_count++
+          if cmd.owner is game.game.result
+            unit_data[cmd.building].w_count++
+          else
+            unit_data[cmd.building].l_count++
+
+
 #      unit_data_per_game = JSON.parse JSON.stringify unit_data
 #
 #      games = 0
@@ -128,6 +118,12 @@ angular.module('valleyOfBonesFrontendApp')
 #        unit_data_per_game[unit].p2_count /= games
 #        unit_data_per_game[unit].w_count /= games
 #        unit_data_per_game[unit].l_count /= games
+
+      totalUnitsPieChart.update(({"label": unit.replace("-base", ""), "value": value.count} for unit, value of unit_data))
+      unitsP1PieChart.update(({"label": unit.replace("-base", ""), "value": value.p1_count} for unit, value of unit_data))
+      unitsP2PieChart.update(({"label": unit.replace("-base", ""), "value": value.p2_count} for unit, value of unit_data))
+      unitsWinnerPieChart.update(({"label": unit.replace("-base", ""), "value": value.w_count} for unit, value of unit_data))
+      unitsLoserPieChart.update(({"label": unit.replace("-base", ""), "value": value.l_count} for unit, value of unit_data))
 #
 #      units_per_game = {}
 #      units_per_game[unit] = udata.count for unit, udata of unit_data_per_game
