@@ -1,1 +1,69 @@
-<p>This is the units view.</p>
+<div class="col-md-12">
+    <div class="row">
+        <h1>Units</h1>
+    </div>
+    <div class="row unit" ng-repeat="unit in units.entities">
+        <div class="col-md-1">
+            <img src="images/game/{{unit.image}}.png">
+            <table width="100%">
+                <tr ng-hide="unit.properties.cost < 0">
+                    <td><img src="images/game/money.png"></td>
+                    <td>{{ unit.properties.cost }}</td>
+                </tr>
+                <tr ng-hide="unit.properties.food < 0 || unit.properties.food[0] < 0">
+                    <td><img src="images/game/supply.png"></td>
+                    <td>{{ unit.properties.food }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-7">
+            <b class="lead">{{ unit.title }} </b>
+            <p exp-markdown="unit.desc"></p>
+        </div>
+        <div class="col-md-4">
+            <b class="lead">Stats</b>
+            <table width="100%">
+                <tr>
+                    <td width="10%"><img src="images/game/hospital-cross.png" alt="Health" title="Health"></td>
+                    <td width="10%">{{ unit.properties.maxhp }}</td>
+                    <td width="10%"><img src="images/game/walking-boot.png" alt="Movement Speed" title="Movement Speed"></td>
+                    <td width="10%">{{ unit.properties.movespeed }}</td>
+                    <td width="10%"><img src="images/game/rune-sword.png" alt="Attack Speed" title="Attack Speed"></td>
+                    <td width="10%">{{ unit.properties.attackspeed }}</td>
+                    <td width="10%"></td>
+                    <td width="10%"></td>
+                    <td rowspan="3" width="20%">
+                      <div ng-show="unit.properties.ability != null">
+                        <img src="images/game/{{unit.properties.ability}}.png" alt="{{unit.properties.ability}}" title="{{unit.properties.ability}}" ng-hide="unit.properties.ability.name != null">
+                        <img src="images/game/{{unit.properties.ability.name}}.png" alt="{{unit.properties.ability.name}}" title="{{unit.properties.ability.name}}" ng-show="unit.properties.ability.name != null">
+                      </div>
+                      <div ng-hide="unit.properties.ability != null">&nbsp;</div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><img src="images/game/crossed-swords.png" alt="Attack Damage" title="Attack Damage"></td>
+                    <td>{{ unit.properties.attackdamage }}</td>
+                    <td><img src="images/game/archery-target.png" alt="Attack Range" title="Attack Range"></td>
+                    <td>{{ unit.properties.attackrange }}</td>
+                    <td><img src="images/game/reticule.png" alt="Sight Range" title="Sight Range"></td>
+                    <td>{{ unit.properties.sightrange || unit.properties.attackrange }}</td>
+                    <td><img src="images/game/checked-shield.png" alt="Armor" title="Armor"></td>
+                    <td>{{ unit.properties.armor }}</td>
+
+                </tr>
+                <tr>
+                    <td ng-show="unit.properties.bonus.light != null"><img src="images/game/light.png" alt="Bonus vs Light" title="Bonus vs Light"></td>
+                    <td ng-show="unit.properties.bonus.light != null">x{{ unit.properties.bonus.light }}</td>
+                    <td ng-show="unit.properties.bonus.armored != null"><img src="images/game/armored.png" alt="Bonus vs Armored" title="Bonus vs Armored"></td>
+                    <td ng-show="unit.properties.bonus.armored != null">x{{ unit.properties.bonus.armored }}</td>
+                    <td ng-show="unit.properties.bonus.building != null"><img src="images/game/building.png" alt="Bonus vs Building" title="Bonus vs Building"></td>
+                    <td ng-show="unit.properties.bonus.building != null">x{{ unit.properties.bonus.building }}</td>
+
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>

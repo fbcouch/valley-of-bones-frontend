@@ -20,7 +20,7 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 }
 
 .img-logo {
-  margin-top: -87px;
+  //margin-top: -87px;
 }
 
 hr.small {
@@ -31,11 +31,20 @@ html, body {
   height: 100%;
 }
 
+body {
+  background: #ccc;
+}
+
 .container {
-  padding-top: 64px;
-  background-color: #fff;
   min-height: 100%;
   width: 900px;
+  background: #fff;
+  box-shadow: #888888 0px 0px 5px;
+
+  .row:first-child {
+    padding: 0 5px;
+    margin-bottom: 10px;
+  }
 }
 
 /* stuff for the stats page */
@@ -75,4 +84,38 @@ svg.pie text.small-label {
 
 svg.pie text.value {
   fill: #000;
+}
+
+div.post {
+  background: #fff;
+  border: 1px solid #ccc;
+  margin: 0px -5px;
+  margin-bottom: 10px;
+  box-shadow: #888888 3px 3px 3px;
+
+  .date {
+    h2 {
+      color: #ccc;
+    }
+  }
+
+  .body {
+
+  }
+}
+
+div.unit {
+  background: #fff;
+  border: 1px solid #ccc;
+  margin: 0px -5px;
+  margin-bottom: 10px;
+  box-shadow: #888888 3px 3px 3px;
+
+  table {
+    tr {
+      td {
+        font-size: 150%;
+      }
+    }
+  }
 }

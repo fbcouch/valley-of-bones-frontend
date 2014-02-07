@@ -1,0 +1,236 @@
+{
+    "entities": [
+        {
+            "id": "castle-base",
+            "type": "building",
+            "image": "castle",
+            "title": "Base",
+            "desc": "This is your home base - defend it at all costs.\n\n**Increasing Returns**\n\nYour base provides income, 75 per turn, and this amount increased by 3 every 5 turns, up to a maximum of 120 per turn.",
+            "attacksound": "laser_shot",
+            "properties": {
+                "curhp": 100,
+                "maxhp": 100,
+                "armor": 2,
+                "food": -15,
+                "requires": [],
+                "attackdamage": 10,
+                "attackspeed": 2,
+                "attackrange": 3,
+                "movespeed": 0,
+                "cost": -1,
+                "upkeep": -75,
+                "subtype": "building",
+                "ability": {
+                    "name": "increasing-returns",
+                    "interval": 5,
+                    "bonus": -3,
+                    "max": -120
+                }
+            }
+        },
+        {
+            "id": "tower-base",
+            "type": "building",
+            "image": "tower",
+            "title": "Tower",
+            "desc": "Towers are checkpoints that provide a little additional income and supply room according to the following schedule:\n\n * 1st tower: 25 income, 4 supply\n * 2nd tower: 20 income, 3 supply\n * 3rd tower: 10 income, 2 supply\n * Add'l: 5 income, 1 supply",
+            "attacksound": "laser_shot",
+            "properties": {
+                "curhp": 0,
+                "maxhp": 30,
+                "armor": 1,
+                "food": [ -4, -3, -2, -1 ],
+                "requires": [],
+                "attackdamage": 5,
+                "attackspeed": 2,
+                "attackrange": 3,
+                "movespeed": 0,
+                "cost": -1,
+                "upkeep": [ -25, -20, -10, -5 ],
+                "subtype": "building",
+                "capturable": true
+            }
+        },
+        {
+            "id": "marine-base",
+            "type": "unit",
+            "image": "marine",
+            "title": "Space Marine",
+            "desc": "Marines form the core of any good army.\n\n **Detect:**\n\nMarines can see and shoot cloaked units, such as snipers and saboteurs.",
+            "attacksound": "laser_shot",
+            "properties": {
+                "curhp": 15,
+                "maxhp": 15,
+                "armor": 0,
+                "food": 1,
+                "requires": [ "castle-base" ],
+                "attackdamage": 5,
+                "attackspeed": 2,
+                "attackrange": 3,
+                "movespeed": 3,
+                "cost": 45,
+                "subtype": "light",
+                "ability": "detect",
+                "buildtime": 1
+            }
+        },
+
+        {
+            "id": "sniper-base",
+            "type": "unit",
+            "image": "sniper",
+            "title": "Sniper",
+            "desc": "With a 4x bonus vs infantry and the stealth ability, snipers are the ultimate anti-infantry weapon.\n\n**Stealth:**\n\nWhile cloaked, only detectors can see or fire at snipers. Movement speed is reduced by half. Cannot enter cloak on any turn when the sniper has already cloaked, fired, or moved more than once.",
+            "attacksound": "laser_shot",
+            "properties": {
+                "curhp": 15,
+                "maxhp": 15,
+                "armor": 0,
+                "food": 2,
+                "requires": [ "castle-base" ],
+                "attackdamage": 5,
+                "attackspeed": 1,
+                "attackrange": 5,
+                "movespeed": 2,
+                "cost": 100,
+                "subtype": "light",
+                "bonus": {
+                    "light": 4
+                },
+                "ability": "stealth",
+                "buildtime": 1
+            }
+        },
+
+        {
+            "id": "bazooka",
+            "type": "unit",
+            "image": "bazooka",
+            "title": "Bazooka Guy",
+            "desc": "The bazooka guy is the infantry's answer to mech.",
+            "attacksound": "laser_shot",
+            "properties": {
+                "curhp": 20,
+                "maxhp": 20,
+                "armor": 0,
+                "food": 2,
+                "requires": [ "castle-base" ],
+                "attackdamage": 10,
+                "attackspeed": 1,
+                "attackrange": 3,
+                "movespeed": 2,
+                "cost": 75,
+                "subtype": "light",
+                "bonus": {
+                    "armored": 2,
+                    "building": 1.5
+                },
+                "buildtime": 1
+            }
+        },
+
+        {
+            "id": "saboteur",
+            "type": "unit",
+            "image": "saboteur",
+            "title": "Saboteur",
+            "desc": "The saboteur is an infiltrator capable of taking a tower without a fight or severely damaging units.\n\n**Sabotage:**\n\nThe saboteur is always cloaked. When the saboteur attacks a tower, that tower is now under your control. When the saboteur attacks other units, their health is reduced to 1. The saboteur cannot attack the base. The saboteur is a suicide unit.",
+            "attacksound": "laser_shot",
+            "properties": {
+                "curhp": 5,
+                "maxhp": 5,
+                "armor": 0,
+                "food": 2,
+                "requires": [ "castle-base" ],
+                "attackdamage": 0,
+                "attackspeed": 1,
+                "attackrange": 1,
+                "movespeed": 4,
+                "cost": 90,
+                "subtype": "light",
+                "buildtime": 1,
+                "ability": "sabotage"
+            }
+        },
+
+        {
+            "id": "tank-base",
+            "type": "unit",
+            "image": "tank",
+            "title": "Hover Tank",
+            "desc": "The hover tank is the workhorse of the mech corps, with high hp, armor, and damage output.",
+            "attacksound": "laser_shot",
+            "properties": {
+                "curhp": 45,
+                "maxhp": 45,
+                "armor": 2,
+                "food": 4,
+                "requires": [ "castle-base" ],
+                "attackdamage": 15,
+                "attackspeed": 1,
+                "attackrange": 3,
+                "movespeed": 1,
+                "cost": 130,
+                "subtype": "armored",
+                "buildtime": 1,
+                "bonus": {
+                    "armored": 1.5,
+                    "building": 1.5
+                }
+            }
+        },
+
+        {
+            "id": "light-mech",
+            "type": "unit",
+            "image": "light-mech",
+            "title": "Mech Walker",
+            "desc": "The mech walker is the mech counter to infantry.",
+            "attacksound": "laser_shot",
+            "properties": {
+                "curhp": 30,
+                "maxhp": 30,
+                "armor": 1,
+                "food": 3,
+                "requires": [ "castle-base" ],
+                "attackdamage": 5,
+                "attackspeed": 4,
+                "attackrange": 3,
+                "movespeed": 2,
+                "cost": 120,
+                "subtype": "armored",
+                "buildtime": 1
+            }
+        },
+
+        {
+            "id": "artillery",
+            "type": "unit",
+            "image": "artillery",
+            "title": "Artillery",
+            "desc": "With a long range and splash damage, the artillery can rain down destruction upon your enemy.",
+            "attacksound": "cannon_fire",
+            "properties": {
+                "curhp": 15,
+                "maxhp": 15,
+                "armor": 1,
+                "food": 4,
+                "requires": [ "castle-base" ],
+                "attackdamage": 15,
+                "attackspeed": 1,
+                "attackrange": 5,
+                "sightrange": 3,
+                "movespeed": 1,
+                "cost": 150,
+                "subtype": "armored",
+                "buildtime": 1,
+                "splashdistance": 1,
+                "splashdamage": 0.34,
+                "bonus": {
+                    "armored": 2,
+                    "building": 2
+                }
+            }
+        }
+    ]
+}

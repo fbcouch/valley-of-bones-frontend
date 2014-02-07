@@ -3,7 +3,8 @@
 angular.module('valleyOfBonesFrontendApp', [
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'exp.markdown'
 ])
   .config ($routeProvider) ->
     $routeProvider
