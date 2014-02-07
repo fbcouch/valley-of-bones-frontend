@@ -14,31 +14,29 @@ angular.module('valleyOfBonesFrontendApp')
     unitsLoserPieChart = new PieChart('#unitsLoserPieChart', 'LOSER', 'units built')
 
     data = $resource('http://secure-caverns-9874.herokuapp.com/game').query () ->
-      for game in data
-        if !isNaN(parseFloat(game.version)) and isFinite(game.version)
-          game.version = "0.0.#{game.version}"
-        game.game = JSON.parse(game.game.replace(',]', ']'))
-        game.game.map or= "valley.json" # default map before 0.1.8
 
+      data = clean_up(data)
 
-      # remove short games (< 10 turns)
-
-      data = data.map( (game) ->
-        if game.game.history.length >= 10 then game else null
-      )
-
-      data = (game for game in data when game?)
-
+      version_groups = []
       $scope.versions = []
       $scope.maps = []
       for game in data
+        if (version_groups.length is 0 or game.version.split('.')[0] isnt version_groups[version_groups.length - 1].split('.')[0])
+          # different major versions
+          version_groups.push "#{game.version.split('.')[0]}.x.x"
+        else if (game.version.split('.')[1] isnt version_groups[version_groups.length - 1].split('.')[1])
+          # different minor versions
+          version_groups.push "#{game.version.split('.')[0]}.#{game.version.split('.')[1]}.x"
+
         $scope.versions.push game.version if not (game.version in $scope.versions)
         $scope.maps.push game.game.map if not (game.game.map in $scope.maps)
+
+      $scope.version_groups = version_groups
 
       $scope.update()
 
     filter = (game) ->
-      return false if $scope.filterVersion? and game.version isnt $scope.filterVersion
+      return false if $scope.filterVersion? and game.version.indexOf($scope.filterVersion.replace(/\.x/g, '')) < 0
       return false if $scope.filterMap? and game.game.map isnt $scope.filterMap
       true
 
@@ -108,38 +106,11 @@ angular.module('valleyOfBonesFrontendApp')
             unit_data[cmd.building].l_count++
 
 
-#      unit_data_per_game = JSON.parse JSON.stringify unit_data
-#
-#      games = 0
-#      games++ for game in data when game.version is "0.0.17"
-#      for unit of unit_data_per_game
-#        unit_data_per_game[unit].count /= games
-#        unit_data_per_game[unit].p1_count /= games
-#        unit_data_per_game[unit].p2_count /= games
-#        unit_data_per_game[unit].w_count /= games
-#        unit_data_per_game[unit].l_count /= games
-
       totalUnitsPieChart.update(({"label": unit.replace("-base", ""), "value": value.count} for unit, value of unit_data))
       unitsP1PieChart.update(({"label": unit.replace("-base", ""), "value": value.p1_count} for unit, value of unit_data))
       unitsP2PieChart.update(({"label": unit.replace("-base", ""), "value": value.p2_count} for unit, value of unit_data))
       unitsWinnerPieChart.update(({"label": unit.replace("-base", ""), "value": value.w_count} for unit, value of unit_data))
       unitsLoserPieChart.update(({"label": unit.replace("-base", ""), "value": value.l_count} for unit, value of unit_data))
-#
-#      units_per_game = {}
-#      units_per_game[unit] = udata.count for unit, udata of unit_data_per_game
-#      $scope.createChart(units_per_game, '#unitsBuiltPerGame', 1)
-#
-#      units_per_game[unit] = udata.p1_count for unit, udata of unit_data_per_game
-#      $scope.createChart(units_per_game, '#unitsP1BuiltPerGame', 1)
-#
-#      units_per_game[unit] = udata.p2_count for unit, udata of unit_data_per_game
-#      $scope.createChart(units_per_game, '#unitsP2BuiltPerGame', 1)
-#
-#      units_per_game[unit] = udata.w_count for unit, udata of unit_data_per_game
-#      $scope.createChart(units_per_game, '#unitsWBuiltPerGame', 1)
-#
-#      units_per_game[unit] = udata.l_count for unit, udata of unit_data_per_game
-#      $scope.createChart(units_per_game, '#unitsLBuiltPerGame', 1)
 
     $scope.setVersionFilter = (version) ->
       console.log 'version filter applied'
@@ -175,6 +146,34 @@ angular.module('valleyOfBonesFrontendApp')
       .attr('y', barHeight / 2)
       .attr('dy', '.35em')
       .text((d, i) -> "#{labels[i]}: #{d.toFixed(decimal_places or 0)}")
+
+
+clean_up = (data) ->
+  for game in data
+    if !isNaN(parseInt(game.version)) and isFinite(game.version)
+      game.version = "0.#{parseInt(parseInt(game.version) / 10)}.#{parseInt(game.version) % 10}"
+    else if /0\.0\.\d+/.test(game.version)
+      game.version = game.version[4...]
+      game.version = "0.#{parseInt(parseInt(game.version) / 10)}.#{parseInt(game.version) % 10}"
+
+    game.game = JSON.parse(game.game.replace(',]', ']'))
+    game.game.map or= "valley" # default map before 0.1.8
+    game.game.map = game.game.map.replace(".json", '')
+
+  # remove short games (< 10 turns)
+
+  data = data.map( (game) ->
+    if game.game.history.length >= 10 then game else null
+  )
+
+  data = (game for game in data when game?)
+
+  data.sort (a, b) ->
+    a_version = a.version.split('.')
+    b_version = b.version.split('.')
+    return parseInt(b_version[0]) - parseInt(a_version[0]) if a_version[0] isnt b_version[0]
+    return parseInt(b_version[1]) - parseInt(a_version[1]) if a_version[1] isnt b_version[1]
+    parseInt(b_version[2]) - parseInt(a_version[2]) if a_version[2] isnt b_version[2]
 
 
 class PieChart
